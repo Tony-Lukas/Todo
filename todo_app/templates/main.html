@@ -21,7 +21,8 @@
         
     <form action="{% url 'main'%}" method="POST" class="d-flex">
         {% csrf_token %}
-        <input type="text" name="task" id="" placeholder="What is Next?" class="form-control me-2">
+        <!-- <input type="text" name="task" id="" placeholder="What is Next?" class="form-control me-2"> -->
+         {{form.as_table}}
         <button type="submit" class="btn btn-primary">Add</button>
 
     </form>

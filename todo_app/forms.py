@@ -15,10 +15,11 @@ class DetailForm(forms.ModelForm):
                                'class':'form-control',
                                'rows':'5',
                            })))
-    states = forms.BooleanField(label='',
-                                widget=(forms.widgets.CheckboxInput()),
-                                required=False)
+    complete = forms.BooleanField()#label='',
+                                #widget=(forms.widgets.CheckboxInput()),
+                                #required=False)
     
     class Meta:
         model = TodoItems
-        fields = ('task','details','states')
+        #fields = ('task','details','states')
+        fields = '__all__'

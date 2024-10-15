@@ -6,10 +6,14 @@ from .forms import DetailForm
 
 # Create your views here.
 def main(request):
+    form = DetailForm(request.POST or None)
     if request.method == 'POST':
-        task = request.POST['task']
-        new_task = TodoItems(task=task)
-        new_task.save()
+        if form.is_valid():
+            form.save()
+        #task = request.POST['task']
+        #detail = request.POST['detail']
+        #new_task = TodoItems(task=task,detail=detail)
+        #new_task.save()
         messages.success(request,'New Task added')
         return redirect('main')
 
@@ -20,6 +24,7 @@ def main(request):
     content = {
         'todo_items':todo_items,
         'done_items':done_items,
+        'form':form,
     }
     return render(request, 'main.html',content)
 
