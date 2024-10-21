@@ -1,21 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Todo List</h1>
+    <h1>Todo Group</h1>
     <div class="list-group">
-        {% for item in todo_items %}
+        {% for group in todo_groups %}
         <div class="d-flex w-100 justify-content-between">
-        <a href="{% url 'add_detail' item.id %}" class="list-group-item list-group-item-action">
+        <a href="{% url 'item_main' group.id %}" class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">{{item.task}}</h5>
-                <small>{{item.created_time}}</small>
-            </div>
-            {% if item.details%}
-                <p class="mb-1">{{item.details}}</p>    
-            {% endif%}        
+                {% if group.state %}
+                <h5 class="mb-1"><strike>{{group.name}}</strike></h5>
+                {% else %}
+                <h5 class="mb-1">{{group.name}}</h5>
+                {% endif %}
+
+            </div>      
         </a>
-        <a href="{% url 'done_task' item.id %}" class="btn btn-outline-success text-center">Done</a>
-        <a href="{% url 'delete_task' item.id %}" class="btn btn-outline-danger text-center">Delete</a>
+        <a href="{% url 'update_group' group.id %}" class="btn btn-outline-success text-center">Update</a>
+
+        <a href="{% url 'delete_group' group.id %}" class="btn btn-outline-danger text-center">Delete</a>
     </div>
         {% endfor %}
         
@@ -27,11 +29,4 @@
 
     </form>
     </div>
-    
-    <h1>Done</h1>
-    <ul class="list-group">
-        {% for item in done_items %}
-            <li class="list-group-item">{{item.task}}</li>
-        {% endfor %}
-    </ul>
 {% endblock %}

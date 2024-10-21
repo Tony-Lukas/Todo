@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{group.name}}</h1>
+    <div class="list-group">
+        {% for item in items %}
+        <div class="d-flex w-100 justify-content-between">
+        <a href="{% url 'add_detail' item.id %}" class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+                {% if item.complete %}
+                <h5 class="mb-1"><strike>{{item.task}}</strike></h5>
+                {% else %}
+                <h5 class="mb-1">{{item.task}}</h5>
+                <small>{{item.created_time}}</small>
+                
+            
+            {% if item.details%}
+                <p class="mb-1">{{item.details}}</p>    
+            {% endif%}   
+            {% endif %} 
+        </div>    
+        </a>
+        <a href="{% url 'done_task' item.id %}" class="btn btn-outline-success text-center">Done</a>
+        <a href="{% url 'delete_task' item.id %}" class="btn btn-outline-danger text-center">Delete</a>
+    </div>
+        {% endfor %}
+        
+    <form action="{% url 'item_main' group.id%}" method="POST" class="d-flex">
+        {% csrf_token %}
+        <!-- <input type="text" name="task" id="" placeholder="What is Next?" class="form-control me-2"> -->
+         {{form.as_table}}
+        <button type="submit" class="btn btn-primary">Add</button>
+
+    </form>
+    </div>
+{% endblock %}

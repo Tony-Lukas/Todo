@@ -1,6 +1,11 @@
 from django import forms
-from .models import TodoItems
+from .models import TodoItem,TodoGroup
 from datetime import datetime, timezone
+
+class GroupForm(forms.ModelForm):
+    class Meta:
+        model = TodoGroup
+        fields = '__all__'
 
 class DetailForm(forms.ModelForm):
     cleaned_data = datetime.now(timezone.utc)
@@ -15,11 +20,11 @@ class DetailForm(forms.ModelForm):
                                'class':'form-control',
                                'rows':'5',
                            })))
-    complete = forms.BooleanField()#label='',
-                                #widget=(forms.widgets.CheckboxInput()),
-                                #required=False)
+    complete = forms.BooleanField(label='',
+                                widget=(forms.widgets.CheckboxInput()),
+                                required=False)
     
     class Meta:
-        model = TodoItems
+        model = TodoItem
         #fields = ('task','details','states')
         fields = '__all__'
