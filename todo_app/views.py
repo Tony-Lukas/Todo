@@ -78,3 +78,12 @@ def update_group(request,group_id):
             form.save()
             return redirect('main')
     return render(request,'group_update_form.html',context)
+
+def add_group(request):
+    form = GroupForm(request.POST or None)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            messages.success(request,'Done')
+            return redirect('main')
+    return render(request,'add_group_form.html',{'form':form})
