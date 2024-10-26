@@ -7,11 +7,9 @@
         <div class="d-flex w-100 justify-content-between">
         <a href="{% url 'item_main' group.id %}" class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-between">
-                {% if group.state %}
-                <h5 class="mb-1"><strike>{{group.name}}</strike></h5>
-                {% else %}
                 <h5 class="mb-1">{{group.name}}</h5>
-                {% endif %}
+                <p>{{group.todoitem_set.count}}</p>
+                
 
             </div>      
         </a>
@@ -20,13 +18,6 @@
         <a href="{% url 'delete_group' group.id %}" class="btn btn-outline-danger text-center">Delete</a>
     </div>
         {% endfor %}
-        
-    <form action="{% url 'main'%}" method="POST" class="d-flex">
-        {% csrf_token %}
-        <!-- <input type="text" name="task" id="" placeholder="What is Next?" class="form-control me-2"> -->
-         {{form.as_table}}
-        <button type="submit" class="btn btn-primary">Add</button>
-
-    </form>
+    <a href="{% url 'add_group' %}">Create New Group</a>
     </div>
 {% endblock %}

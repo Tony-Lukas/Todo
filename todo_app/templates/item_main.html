@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <a href="{% url 'main' %}" class="btn btn-outline-primary">Back</a>
     <h1>{{group.name}}</h1>
     <div class="list-group">
         {% for item in items %}
@@ -28,7 +29,7 @@
     <form action="{% url 'item_main' group.id%}" method="POST" class="d-flex">
         {% csrf_token %}
         <!-- <input type="text" name="task" id="" placeholder="What is Next?" class="form-control me-2"> -->
-         {{form.as_table}}
+         {{form.as_p}}
         <button type="submit" class="btn btn-primary">Add</button>
 
     </form>

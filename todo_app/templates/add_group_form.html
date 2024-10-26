@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="col-md-6 offset-md-3"></div>
-        <h1>Update Group</h1>
+        <h1>Create New Group</h1>
+        <p>{{hello}}</p>
         <form method="POST">
             {% csrf_token%}
-            {{form}}
-            <button type="submit">Update</button>
+            {{fromset}}
+            <button type="submit">Add</button>
         </form>
     </div>
 {% endblock %}
